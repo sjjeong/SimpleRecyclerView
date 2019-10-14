@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-    
+
     <Button
         android:layout_width="match_parent"
-        android:onClick="showMvvmActivity"
         android:layout_height="wrap_content"
+        android:onClick="showMvpActivity"
+        android:text="MVP" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showMvvmActivity"
         android:text="MVVM" />
 
 </LinearLayout>

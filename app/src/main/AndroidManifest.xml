@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvvm.MvvmActivity" />
+        <activity android:name=".mvp.MvpActivity" />
     </application>
 
 </manifest>
