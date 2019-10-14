@@ -8,6 +8,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="showNormalActivity"
+        android:text="NORMAL" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="showMvpActivity"
         android:text="MVP" />
 
