@@ -1,12 +1,13 @@
 package com.dino.simplerecyclerview
 
+import android.content.Intent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.dino.simplerecyclerview.mvvm.MvvmActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    fun showMvvmActivity(view: View) {
+        startActivity(Intent(this, MvvmActivity::class.java))
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleRecyclerView</string>
+    <string name="refresh">refresh</string>
 </resources>
