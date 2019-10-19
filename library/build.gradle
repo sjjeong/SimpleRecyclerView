@@ -33,3 +33,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
 }
+
+apply from: rootProject.file('publish.gradle')
