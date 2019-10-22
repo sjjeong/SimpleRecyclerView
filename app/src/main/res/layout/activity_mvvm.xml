@@ -27,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            bind:itemLayout="@{@layout/item_vector_asset}"
-            bind:items="@{vm.vectorAssetItems}"
+            bind:dino_itemLayout="@{@layout/item_vector_asset}"
+            bind:dino_items="@{vm.vectorAssetItems}"
             tools:itemCount="10"
             tools:listitem="@layout/item_vector_asset" />
 

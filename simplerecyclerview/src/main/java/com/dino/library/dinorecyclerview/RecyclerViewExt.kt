@@ -6,20 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * items="@{vm.liveMainItem}"
+ * dino_items="@{vm.liveMainItem}"
  */
-@BindingAdapter("items")
-fun RecyclerView.setItems(items: List<Any>?) {
-    (adapter as? DinoAdapter)?.replaceAll(items)
-    (adapter as? DinoListAdapter)?.submitList(items)
+@BindingAdapter("dino_items")
+fun RecyclerView.setItems(dino_items: List<Any>?) {
+    (adapter as? DinoAdapter)?.replaceAll(dino_items)
+    (adapter as? DinoListAdapter)?.submitList(dino_items)
 }
 
 /**
- * itemLayout="@{@layout/item_main}"
- * items="@{vm.liveMainItem}"
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
  */
 @Suppress("UNCHECKED_CAST")
-@BindingAdapter("itemLayout", "items")
+@BindingAdapter("dino_itemLayout", "dino_items")
 fun RecyclerView.setDinoAdapter(
     @LayoutRes adapterItemId: Int,
     items: List<Any>?
@@ -33,20 +33,20 @@ fun RecyclerView.setDinoAdapter(
 }
 
 /**
- * diffCallback="@{(Object)MainItem.Companion}"
- * itemLayout="@{@layout/item_main}"
- * items="@{vm.liveMainItem}"
+ * dino_diffCallback="@{(Object)MainItem.Companion}"
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
  */
 @Suppress("UNCHECKED_CAST")
-@BindingAdapter("itemLayout", "diffCallback", "items")
+@BindingAdapter("dino_itemLayout", "dino_diffCallback", "dino_items")
 fun RecyclerView.setDinoListAdapter(
-    @LayoutRes itemLayout: Int,
+    @LayoutRes dino_itemLayout: Int,
     diffCallback: DiffUtil.ItemCallback<Any>,
     items: List<Any>?
 ) {
     val simpleListAdapter =
         this.adapter as? DinoListAdapter
-            ?: DinoListAdapter(itemLayout, diffCallback).also {
+            ?: DinoListAdapter(dino_itemLayout, diffCallback).also {
                 this.adapter = it
             }
     simpleListAdapter.submitList(items)
