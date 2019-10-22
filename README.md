@@ -2,10 +2,13 @@
 SimpleRecyclerView aims to help produce an easily usable implementation of a RecyclerView.Adapter and RecyclerView.ViewHolder  
 
 ## Dependency
+
+[ ![Download](https://api.bintray.com/packages/sjjeong1225/maven/simplerecyclerview/images/download.svg) ](https://bintray.com/sjjeong1225/maven/simplerecyclerview/_latestVersion)
+
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    implementation 'com.dino.library:simplerecyclerview:0.0.2'
+    implementation 'com.dino.library:simplerecyclerview:x.y.z'
 }
 ```
 
