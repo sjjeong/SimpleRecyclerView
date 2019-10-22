@@ -5,7 +5,7 @@ SimpleRecyclerView aims to help produce an easily usable implementation of a Rec
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    implementation 'com.dino.library:simplerecyclerview:0.0.1'
+    implementation 'com.dino.library:simplerecyclerview:0.0.2'
 }
 ```
 
@@ -55,8 +55,8 @@ if your item name of item_layout.xml is not "item", can't bind item in ViewHolde
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    bind:itemLayout="@{@layout/item_layout}"
-    bind:items="@{items}" />
+    bind:dino_itemLayout="@{@layout/item_layout}"
+    bind:dino_items="@{items}" />
 ```
 ### RecyclerView.SimpleAdapter
 ```xml
@@ -76,9 +76,9 @@ if your item name of item_layout.xml is not "item", can't bind item in ViewHolde
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    bind:diffCallback="@{diffCallback}"
-    bind:itemLayout="@{@layout/item_layout}"
-    bind:items="@{items}" />
+    bind:dino_diffCallback="@{diffCallback}"
+    bind:dino_itemLayout="@{@layout/item_layout}"
+    bind:dino_items="@{items}" />
 ```
 
 ### Don't set item, just set adapter
@@ -87,8 +87,8 @@ Just set null value in `bind:items` attribute.
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    bind:itemLayout="@{@layout/item_layout}"
-    bind:items="@{null}" />
+    bind:dino_itemLayout="@{@layout/item_layout}"
+    bind:dino_items="@{null}" />
 ```
 ### And item set programmatically(Not Recommended)
 kotlin
@@ -162,8 +162,8 @@ class CustomViewModel : ViewModel() {
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            bind:itemLayout="@{@layout/item_layout}"
-            bind:items="@{vm.customModelItems}" />
+            bind:dino_itemLayout="@{@layout/item_layout}"
+            bind:dino_items="@{vm.customModelItems}" />
 
     </LinearLayout>
 </layout>
