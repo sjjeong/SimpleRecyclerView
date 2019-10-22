@@ -1,24 +1,11 @@
 # SimpleRecyclerView
 SimpleRecyclerView aims to help produce an easily usable implementation of a RecyclerView.Adapter and RecyclerView.ViewHolder  
 
-[![](https://jitpack.io/v/sjjeong/SimpleRecyclerView.svg)](https://jitpack.io/#sjjeong/SimpleRecyclerView)
-
 ## Dependency
-
-Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
-
-```gradle
-allprojects {
-	repositories {
-        maven { url "https://jitpack.io" }
-    }
-}
-```
-
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    implementation 'com.github.sjjeong:SimpleRecyclerView:1.0.0'
+    implementation 'com.dino.library:simplerecyclerview:0.0.1'
 }
 ```
 
@@ -38,15 +25,29 @@ android {
 
 There is a [sample](https://github.com/sjjeong/SimpleRecyclerView/tree/master/app). Sample include architectures pattern such as mvp and mvvm.
 
+### item_layout.xml
+```xml
+<data>
+    <variable
+        name="item" <- very important
+        type="com.your.package.YourItem"/>
+</data>
+
+<TextView
+    android:text="@{item.title}"/>
+<TextView
+    android:text="@{item.content}"/>
+```
+if your item name of item_layout.xml is not "item", can't bind item in ViewHolder
 
 ### RecyclerView.Adapter
 ```xml
 <data>
     <import type="java.util.List" />
-    <import type="com.dino.simplerecyclerview.DataClass" />
+    <import type="com.your.package.YourItem" />
     <variable
         name="items"
-        type="List&lt;DataClass>" />
+        type="List&lt;YourItem>" />
 </data>
 
 ...
@@ -61,10 +62,10 @@ There is a [sample](https://github.com/sjjeong/SimpleRecyclerView/tree/master/ap
 ```xml
 <data>
     <import type="java.util.List" />
-    <import type="com.dino.simplerecyclerview.DataClass" />
+    <import type="com.your.package.YourItem" />
     <variable
         name="items"
-        type="List&lt;DataClass>" />
+        type="List&lt;YourItem>" />
     <variable
         name="diffCallback"
         type="androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;Object>" />
@@ -101,7 +102,72 @@ RecyclerViewExtKt.setItems(recyclerView, items)
 This method has a timing issue.
 If you call a `setItems` function in (`onCreate`, `onStart`, `onResume`), the set of Adapters in the RecyclerView is called afterwards.
 
+## MVVM Sample
 
+### 1. create item_layout.xml
+CustomModel is enum class
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.dino.simplerecyclerview.model.CustomModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.title}" />
+
+    </LinearLayout>
+</layout>
+```
+### 2. create CustomViewModel
+```kotlin
+class CustomViewModel : ViewModel() {
+
+    val customModelItems = ObservableField<List<CustomModel>>()
+
+    init {
+        createNewItem()
+    }
+
+    fun createNewItem() {
+        customModelItems.set(CustomModel.values().toList())
+    }
+}
+```
+### 3. set list item in activity.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.dino.simplerecyclerview.ui.CustomViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            bind:itemLayout="@{@layout/item_layout}"
+            bind:items="@{vm.customModelItems}" />
+
+    </LinearLayout>
+</layout>
+```
 License
 --------
 
