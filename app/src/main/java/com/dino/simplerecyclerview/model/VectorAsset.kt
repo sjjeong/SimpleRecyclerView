@@ -22,6 +22,8 @@ enum class VectorAsset(val resName: String, val resId: Int) {
     VIDEOCAM("VIDEOCAM", R.drawable.ic_videocam_black_24dp),
     WATCH("WATCH", R.drawable.ic_watch_black_24dp),
     WB_CLOUDY("WB_CLOUDY", R.drawable.ic_wb_cloudy_black_24dp),
-    WIFI("WIFI", R.drawable.ic_wifi_black_24dp),
+    WIFI("WIFI", R.drawable.ic_wifi_black_24dp);
+
+    fun toItem(onClick: (VectorAssetItem) -> Unit) = VectorAssetItem(resName, resId, onClick)
 }
 

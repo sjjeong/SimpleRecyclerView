@@ -1,11 +1,13 @@
 package com.dino.simplerecyclerview.mvp
 
-import com.dino.simplerecyclerview.model.VectorAsset
+import com.dino.simplerecyclerview.model.VectorAssetItem
 
 interface MvpContract {
 
     interface View {
-        fun showItem(items: List<VectorAsset>)
+        fun showItem(items: List<VectorAssetItem>)
+
+        fun showContent(item: VectorAssetItem)
     }
 
     interface Presenter {

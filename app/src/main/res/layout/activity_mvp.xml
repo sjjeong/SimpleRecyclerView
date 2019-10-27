@@ -8,11 +8,11 @@
 
         <import type="java.util.List" />
 
-        <import type="com.dino.simplerecyclerview.model.VectorAsset" />
+        <import type="com.dino.simplerecyclerview.model.VectorAssetItem" />
 
         <variable
             name="items"
-            type="List&lt;VectorAsset>" />
+            type="List&lt;VectorAssetItem>" />
 
     </data>
 
