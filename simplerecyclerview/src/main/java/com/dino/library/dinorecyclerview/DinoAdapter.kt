@@ -21,12 +21,18 @@ open class DinoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        DinoViewHolder(layoutRes = layoutRes, parent = parent)
+        DinoViewHolder(layoutRes = viewType, parent = parent)
 
     override fun getItemCount() =
         items.size
 
     override fun onBindViewHolder(holder: DinoViewHolder, position: Int) =
         holder.onBindViewHolder(items[position])
+
+    override fun getItemViewType(position: Int) =
+        when (val item = items[position]) {
+            is ItemViewType -> item.itemLayoutResId
+            else -> layoutRes
+        }
 
 }
