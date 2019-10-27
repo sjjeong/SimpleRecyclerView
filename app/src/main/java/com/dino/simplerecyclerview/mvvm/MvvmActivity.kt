@@ -6,7 +6,7 @@ import androidx.databinding.Observable
 import com.dino.simplerecyclerview.R
 import com.dino.simplerecyclerview.base.BaseMvvmActivity
 import com.dino.simplerecyclerview.databinding.ActivityMvvmBinding
-import com.dino.simplerecyclerview.model.VectorAssetItem
+import com.dino.simplerecyclerview.model.BaseVectorAssetItem
 
 class MvvmActivity :
     BaseMvvmActivity<ActivityMvvmBinding>(R.layout.activity_mvvm, MvvmViewModel::class.java) {
@@ -22,7 +22,7 @@ class MvvmActivity :
         })
     }
 
-    private fun showContent(item: VectorAssetItem) {
+    private fun showContent(item: BaseVectorAssetItem) {
         Toast.makeText(this, item.resName, Toast.LENGTH_SHORT).show()
     }
 

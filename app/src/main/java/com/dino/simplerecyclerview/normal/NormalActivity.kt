@@ -6,8 +6,8 @@ import android.widget.Toast
 import com.dino.simplerecyclerview.R
 import com.dino.simplerecyclerview.base.BaseDataBindingActivity
 import com.dino.simplerecyclerview.databinding.ActivityNormalBinding
+import com.dino.simplerecyclerview.model.BaseVectorAssetItem
 import com.dino.simplerecyclerview.model.VectorAsset
-import com.dino.simplerecyclerview.model.VectorAssetItem
 
 class NormalActivity : BaseDataBindingActivity<ActivityNormalBinding>(R.layout.activity_normal) {
 
@@ -28,7 +28,7 @@ class NormalActivity : BaseDataBindingActivity<ActivityNormalBinding>(R.layout.a
                 .shuffled()
     }
 
-    private fun showContent(item: VectorAssetItem) {
+    private fun showContent(item: BaseVectorAssetItem) {
         Toast.makeText(this, item.resName, Toast.LENGTH_SHORT).show()
     }
 

@@ -2,14 +2,14 @@ package com.dino.simplerecyclerview.mvvm
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.dino.simplerecyclerview.model.BaseVectorAssetItem
 import com.dino.simplerecyclerview.model.VectorAsset
-import com.dino.simplerecyclerview.model.VectorAssetItem
 
 class MvvmViewModel : ViewModel() {
 
-    val vectorAssetItems = ObservableField<List<VectorAssetItem>>()
+    val vectorAssetItems = ObservableField<List<BaseVectorAssetItem>>()
 
-    val selectedItem = ObservableField<VectorAssetItem>()
+    val selectedItem = ObservableField<BaseVectorAssetItem>()
 
     init {
         createNewItem()
@@ -23,7 +23,7 @@ class MvvmViewModel : ViewModel() {
                 .shuffled())
     }
 
-    private fun showContent(item: VectorAssetItem) {
+    private fun showContent(item: BaseVectorAssetItem) {
         selectedItem.set(item)
     }
 }

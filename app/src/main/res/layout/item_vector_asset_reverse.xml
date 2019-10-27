@@ -12,22 +12,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|end"
         android:onClick="@{() -> item.onClick.invoke(item)}"
         android:orientation="horizontal"
         android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@{item.resName}"
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             bind:imgResId="@{item.resId}" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{item.resName}"
-            android:textSize="16sp" />
 
     </LinearLayout>
 </layout>

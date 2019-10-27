@@ -1,6 +1,7 @@
 package com.dino.simplerecyclerview.model
 
 import com.dino.simplerecyclerview.R
+import kotlin.random.Random
 
 enum class VectorAsset(val resName: String, val resId: Int) {
     ANDROID("ANDROID", R.drawable.ic_android_black_24dp),
@@ -24,6 +25,11 @@ enum class VectorAsset(val resName: String, val resId: Int) {
     WB_CLOUDY("WB_CLOUDY", R.drawable.ic_wb_cloudy_black_24dp),
     WIFI("WIFI", R.drawable.ic_wifi_black_24dp);
 
-    fun toItem(onClick: (VectorAssetItem) -> Unit) = VectorAssetItem(resName, resId, onClick)
+    fun toItem(onClick: (BaseVectorAssetItem) -> Unit) =
+        when (Random.nextInt(2)) {
+            0 -> VectorAssetItem(resName, resId, onClick)
+            else -> VectorAssetReverseItem(resName, resId, onClick)
+        }
+
 }
 

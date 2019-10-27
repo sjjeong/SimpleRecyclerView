@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.dino.simplerecyclerview.R
 import com.dino.simplerecyclerview.base.BaseDataBindingActivity
 import com.dino.simplerecyclerview.databinding.ActivityMvpBinding
-import com.dino.simplerecyclerview.model.VectorAssetItem
+import com.dino.simplerecyclerview.model.BaseVectorAssetItem
 
 class MvpActivity : BaseDataBindingActivity<ActivityMvpBinding>(R.layout.activity_mvp),
     MvpContract.View {
@@ -18,7 +18,7 @@ class MvpActivity : BaseDataBindingActivity<ActivityMvpBinding>(R.layout.activit
         presenter.createItem()
     }
 
-    override fun showItem(items: List<VectorAssetItem>) {
+    override fun showItem(items: List<BaseVectorAssetItem>) {
         binding.items = items
     }
 
@@ -26,7 +26,7 @@ class MvpActivity : BaseDataBindingActivity<ActivityMvpBinding>(R.layout.activit
         presenter.createItem()
     }
 
-    override fun showContent(item: VectorAssetItem) {
+    override fun showContent(item: BaseVectorAssetItem) {
         Toast.makeText(this, item.resName, Toast.LENGTH_SHORT).show()
     }
 
