@@ -171,7 +171,7 @@ class CustomViewModel : ViewModel() {
     </LinearLayout>
 </layout>
 ```
-## Click event handling
+## How to handle click listener of item
 
 ### 1. Add higher-order function to Item class
 ```kotlin
@@ -203,6 +203,22 @@ data class Item(
 
     </LinearLayout>
 </layout>
+```
+
+## Multi ViewType
+
+Just implement ItemViewType
+
+```kotlin
+data class Item1(
+    val title: String,
+    override val itemLayoutResId: Int = R.layout.item_1
+) : ItemViewType
+
+data class Item2(
+    val title: String,
+    override val itemLayoutResId: Int = R.layout.item_2
+) : ItemViewType
 ```
 
 License
