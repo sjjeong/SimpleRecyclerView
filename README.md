@@ -171,6 +171,40 @@ class CustomViewModel : ViewModel() {
     </LinearLayout>
 </layout>
 ```
+## Click event handling
+
+### 1. Add higher-order function to Item class
+```kotlin
+data class Item(
+    val title: String,
+    val onClick: (Item) -> Unit
+)
+```
+
+### 2. Add BindingAdapter to root ViewGroup in item_layout.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.dino.simplerecyclerview.model.Item" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:onClick="@{() -> item.onClick.invoke(item)}"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.title}" />
+
+    </LinearLayout>
+</layout>
+```
+
 License
 --------
 
