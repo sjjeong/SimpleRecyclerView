@@ -51,3 +51,18 @@ fun RecyclerView.setDinoListAdapter(
             }
     simpleListAdapter.submitList(items)
 }
+
+
+@BindingAdapter("dino_itemSpace")
+fun RecyclerView.setItemSpace(space: Float) {
+    val loop = itemDecorationCount
+    for (i in 0 until loop) {
+        val itemDecoration = getItemDecorationAt(i)
+        if (itemDecoration is DinoSpaceItemDecoration) {
+            removeItemDecorationAt(i)
+            break
+        }
+    }
+    val spacePixel = context.resources.displayMetrics.density * space
+    addItemDecoration(DinoSpaceItemDecoration(spacePixel.toInt()))
+}
