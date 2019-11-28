@@ -63,8 +63,7 @@ fun RecyclerView.setItemSpace(space: Float) {
             break
         }
     }
-    val spacePixel = context.resources.displayMetrics.density * space
-    addItemDecoration(DinoSpaceItemDecoration(spacePixel.toInt()))
+    addItemDecoration(DinoSpaceItemDecoration(space.toInt()))
 }
 
 @BindingAdapter("dino_itemSpace")
