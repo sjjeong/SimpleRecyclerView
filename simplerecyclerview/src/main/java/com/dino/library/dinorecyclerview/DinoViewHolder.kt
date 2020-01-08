@@ -17,10 +17,11 @@ open class DinoViewHolder(
 
     protected val binding: ViewDataBinding = DataBindingUtil.bind(itemView)!!
 
-    open fun onBindViewHolder(item: Any?) {
+    open fun onBindViewHolder(item: Any?, eventHolder: Any?) {
         try {
             binding.run {
                 setVariable(BR.item, item)
+                setVariable(BR.eventHolder, eventHolder)
                 executePendingBindings()
             }
         } catch (e: Exception) {

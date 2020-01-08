@@ -5,7 +5,8 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 open class DinoAdapter(
-    @LayoutRes private val layoutRes: Int
+    @LayoutRes private val layoutRes: Int,
+    private val eventHolder: Any? = null
 ) : RecyclerView.Adapter<DinoViewHolder>() {
 
     protected open val items = mutableListOf<Any>()
@@ -27,7 +28,7 @@ open class DinoAdapter(
         items.size
 
     override fun onBindViewHolder(holder: DinoViewHolder, position: Int) =
-        holder.onBindViewHolder(items[position])
+        holder.onBindViewHolder(items[position], eventHolder)
 
     override fun getItemViewType(position: Int) =
         when (val item = items[position]) {

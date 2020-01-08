@@ -7,6 +7,10 @@
             name="item"
             type="Object" />
 
+        <variable
+            name="eventHolder"
+            type="Object" />
+
     </data>
 
     <LinearLayout
