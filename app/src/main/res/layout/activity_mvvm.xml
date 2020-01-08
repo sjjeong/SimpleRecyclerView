@@ -28,6 +28,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="3"
+            bind:dino_vm="@{vm}"
             bind:dino_itemLayout="@{@layout/item_vector_asset}"
             bind:dino_itemSpace="@{`8dp`}"
             bind:dino_items="@{vm.vectorAssetItems}"

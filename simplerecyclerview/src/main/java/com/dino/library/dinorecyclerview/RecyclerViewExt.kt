@@ -24,12 +24,7 @@ fun RecyclerView.setDinoAdapter(
     @LayoutRes adapterItemId: Int,
     items: List<Any>?
 ) {
-    val simpleAdapter =
-        this.adapter as? DinoAdapter
-            ?: DinoAdapter(adapterItemId).also {
-                this.adapter = it
-            }
-    simpleAdapter.replaceAll(items)
+    setDinoAdapterWithEventHolder(adapterItemId, items, null)
 }
 
 /**
@@ -53,6 +48,36 @@ fun RecyclerView.setDinoAdapterWithEventHolder(
 }
 
 /**
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
+ * dino_vm="@{vm}
+ */
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("dino_itemLayout", "dino_items", "dino_vm")
+fun RecyclerView.setDinoAdapterWithVm(
+    @LayoutRes adapterItemId: Int,
+    items: List<Any>?,
+    vm: Any?
+) {
+    setDinoAdapterWithEventHolder(adapterItemId, items, vm)
+}
+
+/**
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
+ * dino_viewModel="@{viewModel}
+ */
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("dino_itemLayout", "dino_items", "dino_viewModel")
+fun RecyclerView.setDinoAdapterWithViewModel(
+    @LayoutRes adapterItemId: Int,
+    items: List<Any>?,
+    viewModel: Any?
+) {
+    setDinoAdapterWithEventHolder(adapterItemId, items, viewModel)
+}
+
+/**
  * dino_diffCallback="@{(Object)MainItem.Companion}"
  * dino_itemLayout="@{@layout/item_main}"
  * dino_items="@{vm.liveMainItem}"
@@ -64,12 +89,7 @@ fun RecyclerView.setDinoListAdapter(
     diffCallback: DiffUtil.ItemCallback<Any>,
     items: List<Any>?
 ) {
-    val simpleListAdapter =
-        this.adapter as? DinoListAdapter
-            ?: DinoListAdapter(dino_itemLayout, diffCallback).also {
-                this.adapter = it
-            }
-    simpleListAdapter.submitList(items)
+    setDinoListAdapterWithEventHolder(dino_itemLayout, diffCallback, items, null)
 }
 
 /**
@@ -92,6 +112,40 @@ fun RecyclerView.setDinoListAdapterWithEventHolder(
                 this.adapter = it
             }
     simpleListAdapter.submitList(items)
+}
+
+/**
+ * dino_diffCallback="@{(Object)MainItem.Companion}"
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
+ * dino_vm="@{vm}
+ */
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("dino_itemLayout", "dino_diffCallback", "dino_items", "dino_vm")
+fun RecyclerView.setDinoListAdapterWithVm(
+    @LayoutRes dino_itemLayout: Int,
+    diffCallback: DiffUtil.ItemCallback<Any>,
+    items: List<Any>?,
+    vm: Any?
+) {
+    setDinoListAdapterWithEventHolder(dino_itemLayout, diffCallback, items, vm)
+}
+
+/**
+ * dino_diffCallback="@{(Object)MainItem.Companion}"
+ * dino_itemLayout="@{@layout/item_main}"
+ * dino_items="@{vm.liveMainItem}"
+ * dino_viewModel="@{viewModel}
+ */
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("dino_itemLayout", "dino_diffCallback", "dino_items", "dino_viewModel")
+fun RecyclerView.setDinoListAdapterWithViewModel(
+    @LayoutRes dino_itemLayout: Int,
+    diffCallback: DiffUtil.ItemCallback<Any>,
+    items: List<Any>?,
+    viewModel: Any?
+) {
+    setDinoListAdapterWithEventHolder(dino_itemLayout, diffCallback, items, viewModel)
 }
 
 
