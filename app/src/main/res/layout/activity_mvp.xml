@@ -14,6 +14,10 @@
             name="items"
             type="List&lt;BaseVectorAssetItem>" />
 
+        <variable
+            name="eventHolder"
+            type="com.dino.simplerecyclerview.ItemClickListener" />
+
     </data>
 
     <LinearLayout
@@ -34,6 +38,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
+            bind:dino_eventHolder="@{eventHolder}"
             bind:dino_itemLayout="@{@layout/item_vector_asset}"
             bind:dino_itemSpace="@{`8dp`}"
             bind:dino_items="@{items}"

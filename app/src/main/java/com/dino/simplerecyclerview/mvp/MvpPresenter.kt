@@ -7,7 +7,7 @@ class MvpPresenter(private val view: MvpContract.View) : MvpContract.Presenter {
     override fun createItem() {
         val items =
             VectorAsset.values()
-                .map { it.toItem(view::showContent) }
+                .map { it.toItem() }
                 .toMutableList()
                 .shuffled()
         view.showItem(items)

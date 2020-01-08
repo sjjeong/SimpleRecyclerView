@@ -6,8 +6,6 @@ interface MvpContract {
 
     interface View {
         fun showItem(items: List<BaseVectorAssetItem>)
-
-        fun showContent(item: BaseVectorAssetItem)
     }
 
     interface Presenter {

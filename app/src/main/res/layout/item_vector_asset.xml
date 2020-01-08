@@ -7,6 +7,11 @@
         <variable
             name="item"
             type="com.dino.simplerecyclerview.model.BaseVectorAssetItem" />
+
+        <variable
+            name="eventHolder"
+            type="com.dino.simplerecyclerview.ItemClickListener" />
+
     </data>
 
     <LinearLayout
@@ -14,7 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
         android:gravity="center_vertical"
-        android:onClick="@{() -> item.onClick.invoke(item)}"
+        android:onClick="@{() -> eventHolder.onClick(item)}"
         android:orientation="horizontal"
         android:padding="16dp">
 

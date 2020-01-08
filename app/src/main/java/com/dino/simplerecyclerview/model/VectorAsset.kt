@@ -25,10 +25,10 @@ enum class VectorAsset(val resName: String, val resId: Int) {
     WB_CLOUDY("WB_CLOUDY", R.drawable.ic_wb_cloudy_black_24dp),
     WIFI("WIFI", R.drawable.ic_wifi_black_24dp);
 
-    fun toItem(onClick: (BaseVectorAssetItem) -> Unit) =
+    fun toItem() =
         when (Random.nextInt(2)) {
-            0 -> VectorAssetItem(resName, resId, onClick)
-            else -> VectorAssetReverseItem(resName, resId, onClick)
+            0 -> VectorAssetItem(resName, resId)
+            else -> VectorAssetReverseItem(resName, resId)
         }
 
 }
