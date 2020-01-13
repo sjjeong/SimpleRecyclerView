@@ -11,6 +11,14 @@
             name="eventHolder"
             type="Object" />
 
+        <variable
+            name="vm"
+            type="Object" />
+
+        <variable
+            name="viewModel"
+            type="Object" />
+
     </data>
 
     <LinearLayout
