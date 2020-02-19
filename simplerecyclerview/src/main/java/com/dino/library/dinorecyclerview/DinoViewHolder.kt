@@ -24,6 +24,7 @@ open class DinoViewHolder(
                 setVariable(BR.eventHolder, eventHolder)
                 setVariable(BR.vm, eventHolder)
                 setVariable(BR.viewModel, eventHolder)
+                setVariable(BR.adapterPosition, adapterPosition)
                 executePendingBindings()
             }
         } catch (e: Exception) {

@@ -19,6 +19,10 @@
             name="viewModel"
             type="Object" />
 
+        <variable
+            name="adapterPosition"
+            type="int" />
+
     </data>
 
     <LinearLayout
