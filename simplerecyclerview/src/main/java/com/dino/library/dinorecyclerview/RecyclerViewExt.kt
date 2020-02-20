@@ -21,6 +21,10 @@ import androidx.recyclerview.widget.RecyclerView
     "dino_eventHolder",
     "dino_vm",
     "dino_viewModel",
+    "dino_headerItem",
+    "dino_headerItemLayout",
+    "dino_footerItem",
+    "dino_footerItemLayout",
     requireAll = false
 )
 fun RecyclerView.setDinoAdapter(
@@ -29,7 +33,11 @@ fun RecyclerView.setDinoAdapter(
     diffCallback: DiffUtil.ItemCallback<Any>? = null,
     eventHolder: Any? = null,
     vm: Any? = null,
-    viewModel: Any? = null
+    viewModel: Any? = null,
+    headerItem: Any? = null,
+    @LayoutRes headerLayoutResId: Int? = null,
+    footerItem: Any? = null,
+    @LayoutRes footerLayoutResId: Int? = null
 ) {
     if (diffCallback == null) {
         // DinoAdapter
@@ -38,6 +46,10 @@ fun RecyclerView.setDinoAdapter(
                 it.eventHolder = eventHolder ?: vm ?: viewModel
                 this.adapter = it
             }
+        simpleAdapter.headerItem = headerItem
+        simpleAdapter.headerLayoutResId = headerLayoutResId
+        simpleAdapter.footerItem = footerItem
+        simpleAdapter.footerLayoutResId = footerLayoutResId
         simpleAdapter.replaceAll(items)
     } else {
         // DinoListAdapter
@@ -46,6 +58,10 @@ fun RecyclerView.setDinoAdapter(
                 it.eventHolder = eventHolder ?: vm ?: viewModel
                 this.adapter = it
             }
+        simpleListAdapter.headerItem = headerItem
+        simpleListAdapter.headerLayoutResId = headerLayoutResId
+        simpleListAdapter.footerItem = footerItem
+        simpleListAdapter.footerLayoutResId = footerLayoutResId
         simpleListAdapter.submitList(items)
     }
 }
