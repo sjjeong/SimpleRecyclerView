@@ -8,11 +8,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 open class DinoViewHolder(
-    @LayoutRes layoutRes: Int,
+    @LayoutRes layoutResId: Int,
     parent: ViewGroup?
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent?.context)
-        .inflate(layoutRes, parent, false)
+        .inflate(layoutResId, parent, false)
 ) {
 
     protected val binding: ViewDataBinding = DataBindingUtil.bind(itemView)!!

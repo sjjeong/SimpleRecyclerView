@@ -5,9 +5,9 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 open class DinoAdapter(
-    @LayoutRes private val layoutRes: Int,
-    private val eventHolder: Any? = null
+    @LayoutRes private val layoutResId: Int?
 ) : RecyclerView.Adapter<DinoViewHolder>() {
+    var eventHolder: Any? = null
 
     protected open val items = mutableListOf<Any>()
 
@@ -22,7 +22,7 @@ open class DinoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        DinoViewHolder(layoutRes = viewType, parent = parent)
+        DinoViewHolder(layoutResId = viewType, parent = parent)
 
     override fun getItemCount() =
         items.size
@@ -33,7 +33,7 @@ open class DinoAdapter(
     override fun getItemViewType(position: Int) =
         when (val item = items[position]) {
             is ItemViewType -> item.itemLayoutResId
-            else -> layoutRes
+            else -> layoutResId ?: error(ADAPTER_CANNOT_CREATED_ERROR_MSG)
         }
 
 }
