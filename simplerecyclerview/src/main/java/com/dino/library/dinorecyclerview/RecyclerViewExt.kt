@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
  * dino_eventHolder="@{eventHolder}
  * dino_vm="@{vm}
  * dino_viewModel="@{viewModel}
+ * dino_headerItem="@{vm.headerItem}"
+ * dino_headerItemLayout="@{@layout/item_header}"
+ * dino_footerItem="@{vm.footerItem}"
+ * dino_footerItemLayout="@{@layout/item_footer}"
  */
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter(
@@ -66,6 +70,9 @@ fun RecyclerView.setDinoAdapter(
     }
 }
 
+/**
+ * dino_itemSpace="@{@dimen/space}"
+ */
 @BindingAdapter("dino_itemSpace")
 fun RecyclerView.setItemSpace(space: Float) {
     val loop = itemDecorationCount
@@ -79,6 +86,9 @@ fun RecyclerView.setItemSpace(space: Float) {
     addItemDecoration(DinoSpaceItemDecoration(space.toInt()))
 }
 
+/**
+ * dino_itemSpace="@{`8dp`}"
+ */
 @BindingAdapter("dino_itemSpace")
 fun RecyclerView.setItemSpace(space: String) {
     if (!space.contains("dp")) {
