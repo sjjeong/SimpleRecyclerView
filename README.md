@@ -1,6 +1,23 @@
 # SimpleRecyclerView
 SimpleRecyclerView aims to help produce an easily usable implementation of a RecyclerView.Adapter and RecyclerView.ViewHolder  
 
+## Attribute
+|name|example|description|
+|-|-|-|
+|dino_items|bind:dino_items="@{vm.itemList}"|Item List to show in RecyclerView|
+|dino_itemLayout|bind:dino_itemLayout="@{@layout/item_main}"|Item Layout to show in RecyclerView|
+|dino_diffCallback|bind:dino_diffCallback="@{(Object)MainItem.Companion}"|DiffUtil.ItemCallback<T>|
+|dino_eventHolder|bind:dino_eventHolder="@{eventHolder}"|Object that has a function for handling event separately from Item|
+|dino_vm|bind:dino_vm="@{vm}"|Object that has a function for handling event separately from Item|
+|dino_viewModel|bind:dino_viewModel="@{viewModel}"|Object that has a function for handling event separately from Item|
+|dino_headerItem|bind:dino_headerItem="@{vm.headerItem}"|Item to show in Header|
+|dino_headerItemLayout|bind:dino_headerItemLayout="@{@layout/item_header}"|Header Layout to show in RecyclerView|
+|dino_footerItem|bind:dino_footerItem="@{vm.footerItem}"|Item to show in Footer|
+|dino_footerItemLayout|bind:dino_footerItemLayout="@{@layout/item_footer}"|Footer Layout to show in RecyclerView|
+|dino_itemSpace|dino_itemSpace="@{@dimen/space}"|Space for each item|
+|dino_itemSpace|dino_itemSpace="@{\`8dp\`}"|Space for each item|
+
+
 ## Dependency
 
 [ ![Download](https://api.bintray.com/packages/sjjeong1225/maven/simplerecyclerview/images/download.svg) ](https://bintray.com/sjjeong1225/maven/simplerecyclerview/_latestVersion)
@@ -172,6 +189,7 @@ class CustomViewModel : ViewModel() {
 </layout>
 ```
 ## How to handle click listener of item
+Deprecated, Use \"dino_eventHolder\" or \"dino_vm\" or \"dino_viewModel\"
 
 ### 1. Add higher-order function to Item class
 ```kotlin
@@ -219,6 +237,22 @@ data class Item2(
     val title: String,
     override val itemLayoutResId: Int = R.layout.item_2
 ) : ItemViewType
+```
+
+## AdpaterPosition
+Add adapterPosition variable to item layout
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="adapterPosition"
+            type="int" />
+    </data>
+
+    ...
+    
+</layout>
 ```
 
 License
