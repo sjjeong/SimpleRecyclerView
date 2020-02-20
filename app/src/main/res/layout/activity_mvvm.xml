@@ -28,10 +28,14 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="3"
-            bind:dino_vm="@{vm}"
+            bind:dino_footerItem="@{vm.randomNumer}"
+            bind:dino_footerItemLayout="@{@layout/item_footer}"
+            bind:dino_headerItem="@{vm.randomNumer}"
+            bind:dino_headerItemLayout="@{@layout/item_header}"
             bind:dino_itemLayout="@{@layout/item_vector_asset}"
             bind:dino_itemSpace="@{`8dp`}"
             bind:dino_items="@{vm.vectorAssetItems}"
+            bind:dino_vm="@{vm}"
             tools:itemCount="10"
             tools:listitem="@layout/item_vector_asset" />
 

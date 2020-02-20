@@ -38,6 +38,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             bind:dino_eventHolder="@{eventHolder}"
+            bind:dino_headerItemLayout="@{@layout/item_header}"
             bind:dino_itemLayout="@{@layout/item_vector_asset}"
             bind:dino_itemSpace="@{@dimen/space}"
             bind:dino_items="@{items}"
