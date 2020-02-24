@@ -16,6 +16,7 @@ SimpleRecyclerView aims to help produce an easily usable implementation of a Rec
 |dino_footerItemLayout|bind:dino_footerItemLayout="@{@layout/item_footer}"|Footer Layout to show in RecyclerView|
 |dino_itemSpace|dino_itemSpace="@{@dimen/space}"|Space for each item|
 |dino_itemSpace|dino_itemSpace="@{\`8dp\`}"|Space for each item|
+|dino_includeEdge|dino_includeEdge="@{true}"|Padding space for RecyclerView|
 
 
 ## Dependency
