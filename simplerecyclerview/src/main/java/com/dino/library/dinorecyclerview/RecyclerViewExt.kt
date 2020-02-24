@@ -73,8 +73,8 @@ fun RecyclerView.setDinoAdapter(
 /**
  * dino_itemSpace="@{@dimen/space}"
  */
-@BindingAdapter("dino_itemSpace")
-fun RecyclerView.setItemSpace(space: Float) {
+@BindingAdapter("dino_itemSpace", "dino_includeEdge", requireAll = false)
+fun RecyclerView.setItemSpace(space: Float = 0f, includeEdge: Boolean = false) {
     val loop = itemDecorationCount
     for (i in 0 until loop) {
         val itemDecoration = getItemDecorationAt(i)
@@ -83,14 +83,14 @@ fun RecyclerView.setItemSpace(space: Float) {
             break
         }
     }
-    addItemDecoration(DinoSpaceItemDecoration(space.toInt()))
+    addItemDecoration(DinoSpaceItemDecoration(space.toInt(), includeEdge))
 }
 
 /**
  * dino_itemSpace="@{`8dp`}"
  */
-@BindingAdapter("dino_itemSpace")
-fun RecyclerView.setItemSpace(space: String) {
+@BindingAdapter("dino_itemSpace", "dino_includeEdge", requireAll = false)
+fun RecyclerView.setItemSpace(space: String = "0dp", includeEdge: Boolean = false) {
     if (!space.contains("dp")) {
         return
     }
@@ -101,5 +101,5 @@ fun RecyclerView.setItemSpace(space: String) {
         0f
     }
     val spacePixel = context.resources.displayMetrics.density * dpSpace
-    setItemSpace(spacePixel)
+    setItemSpace(spacePixel, includeEdge)
 }

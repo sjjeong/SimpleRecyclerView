@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-internal class DinoSpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+internal class DinoSpaceItemDecoration(private val space: Int, private val includeEdge: Boolean) :
+    RecyclerView.ItemDecoration() {
 
-    private val halfSpace = space / 2
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -20,17 +20,16 @@ internal class DinoSpaceItemDecoration(private val space: Int) : RecyclerView.It
         super.getItemOffsets(outRect, view, parent, state)
 
         val position = parent.getChildAdapterPosition(view)
-        val count = parent.adapter?.itemCount ?: 0
 
         when (val layoutManager = parent.layoutManager) {
             is GridLayoutManager -> {
-                setGridLayoutSpace(layoutManager, outRect, count, position)
+                setGridLayoutSpace(layoutManager, outRect, position)
             }
             is StaggeredGridLayoutManager -> {
-                setStaggeredGridLayoutSpace(layoutManager, view, outRect, count, position)
+                setStaggeredGridLayoutSpace(layoutManager, view, outRect, position)
             }
             is LinearLayoutManager -> {
-                setLinearLayoutSpace(layoutManager, outRect, count, position)
+                setLinearLayoutSpace(layoutManager, outRect, position)
             }
         }
 
@@ -39,116 +38,70 @@ internal class DinoSpaceItemDecoration(private val space: Int) : RecyclerView.It
     private fun setGridLayoutSpace(
         layoutManager: GridLayoutManager,
         outRect: Rect,
-        count: Int,
         position: Int
     ) {
         val spanCount = layoutManager.spanCount
-
-
-        val startLineSpace = if (position / spanCount == 0) {
-            0
-        } else {
-            halfSpace
-        }
-
-        val endLineSpace = if (position / spanCount == (count - 1) / spanCount) {
-            0
-        } else {
-            halfSpace
-        }
-
-        when (position % spanCount) {
-            0 -> {
-                // start position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, 0, endLineSpace, halfSpace)
-                    }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(0, startLineSpace, halfSpace, endLineSpace)
-                    }
-                }
-            }
-            spanCount - 1 -> {
-                // end position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, halfSpace, endLineSpace, 0)
-                    }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(halfSpace, startLineSpace, 0, endLineSpace)
-                    }
-                }
-            }
-            else -> {
-                // middle position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, halfSpace, endLineSpace, halfSpace)
-                    }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(halfSpace, startLineSpace, halfSpace, endLineSpace)
-                    }
-                }
-            }
-        }
+        val column = position % spanCount
+        setGridSpace(layoutManager.orientation, outRect, column, spanCount, position)
     }
 
     private fun setStaggeredGridLayoutSpace(
         layoutManager: StaggeredGridLayoutManager,
         view: View,
         outRect: Rect,
-        count: Int,
         position: Int
     ) {
         val spanCount = layoutManager.spanCount
-        val spanIndex =
+        val column =
             (view.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
+        setGridSpace(layoutManager.orientation, outRect, column, spanCount, position)
+    }
 
-        val startLineSpace = if (position / spanCount == 0) {
-            0
-        } else {
-            halfSpace
-        }
-
-        val endLineSpace = if (position / spanCount == (count - 1) / spanCount) {
-            0
-        } else {
-            halfSpace
-        }
-
-
-        when (spanIndex) {
-            0 -> {
-                // start position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, 0, endLineSpace, halfSpace)
+    private fun setGridSpace(
+        @RecyclerView.Orientation orientation: Int,
+        outRect: Rect,
+        column: Int,
+        spanCount: Int,
+        position: Int
+    ) {
+        when (orientation) {
+            RecyclerView.HORIZONTAL -> {
+                if (includeEdge) {
+                    outRect.run {
+                        top = space - column * space / spanCount
+                        bottom = (column + 1) * space / spanCount
+                        if (position < spanCount) {
+                            left = space
+                        }
+                        right = space
                     }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(0, startLineSpace, halfSpace, endLineSpace)
+                } else {
+                    outRect.run {
+                        top = column * space / spanCount
+                        bottom = space - (column + 1) * space / spanCount
+                        if (position >= spanCount) {
+                            left = space
+                        }
                     }
                 }
             }
-            spanCount - 1 -> {
-                // end position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, halfSpace, endLineSpace, 0)
+            RecyclerView.VERTICAL -> {
+                if (includeEdge) {
+                    outRect.run {
+                        left = space - column * space / spanCount
+                        right = (column + 1) * space / spanCount
+                        if (position < spanCount) {
+                            top = space
+                        }
+                        bottom = space
                     }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(halfSpace, startLineSpace, 0, endLineSpace)
-                    }
-                }
-            }
-            else -> {
-                // middle position
-                when (layoutManager.orientation) {
-                    RecyclerView.HORIZONTAL -> {
-                        outRect.set(startLineSpace, halfSpace, endLineSpace, halfSpace)
-                    }
-                    RecyclerView.VERTICAL -> {
-                        outRect.set(halfSpace, startLineSpace, halfSpace, endLineSpace)
+                } else {
+                    outRect.run {
+                        left = column * space / spanCount
+                        right = space - (column + 1) * space / spanCount
+                        if (position >= spanCount) {
+                            top = space
+                        }
                     }
                 }
             }
@@ -158,20 +111,47 @@ internal class DinoSpaceItemDecoration(private val space: Int) : RecyclerView.It
     private fun setLinearLayoutSpace(
         layoutManager: LinearLayoutManager,
         outRect: Rect,
-        count: Int,
         position: Int
     ) {
-        if (position == count - 1) {
-            return
-        }
         when (layoutManager.orientation) {
             RecyclerView.HORIZONTAL -> {
-                outRect.set(0, 0, space, 0)
+                if (includeEdge) {
+                    outRect.run {
+                        if (position < 1) {
+                            left = space
+                        }
+                        top = space
+                        bottom = space
+                        right = space
+                    }
+                } else {
+                    outRect.run {
+                        if (position >= 1) {
+                            left = space
+                        }
+                    }
+                }
             }
             RecyclerView.VERTICAL -> {
-                outRect.set(0, 0, 0, space)
+                if (includeEdge) {
+                    outRect.run {
+                        if (position < 1) {
+                            top = space
+                        }
+                        left = space
+                        right = space
+                        bottom = space
+                    }
+                } else {
+                    outRect.run {
+                        if (position >= 1) {
+                            top = space
+                        }
+                    }
+                }
             }
         }
+
     }
 
 }
