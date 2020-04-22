@@ -50,6 +50,16 @@ open class DinoListAdapter(
         return super.getItemCount() + headerSize + footerSize
     }
 
+    override fun onViewAttachedToWindow(holder: DinoViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.onAttach()
+    }
+
+    override fun onViewDetachedFromWindow(holder: DinoViewHolder) {
+        holder.onDetach()
+        super.onViewDetachedFromWindow(holder)
+    }
+
     override fun getItemViewType(position: Int): Int {
         if (isHeaderPosition(position)) {
             return headerLayoutResId!!
