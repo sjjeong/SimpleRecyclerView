@@ -103,3 +103,22 @@ fun RecyclerView.setItemSpace(space: String = "0dp", includeEdge: Boolean = fals
     val spacePixel = context.resources.displayMetrics.density * dpSpace
     setItemSpace(spacePixel, includeEdge)
 }
+
+/**
+ * dino_onLoad="@{() -> vm.loadItem()}"
+ * dino_threshold="@{10}"
+ */
+@BindingAdapter(
+    "dino_onLoad",
+    "dino_threshold",
+    requireAll = false
+)
+fun RecyclerView.set(
+    onLoad: (() -> Unit)? = null,
+    threshold: Int = DinoEndlessRecyclerViewScrollListener.DEFAULT_VISIBLE_THRESHOLD
+) {
+    onLoad ?: error(NEED_ON_LOAD_EVENT_HANDLING)
+    val layoutManager = layoutManager ?: error(NEED_RECYCLER_VIEW_LAYOUT_MANAGER_ERROR_MSG)
+    val scrollListener = DinoEndlessRecyclerViewScrollListener(layoutManager, threshold, onLoad)
+    addOnScrollListener(scrollListener)
+}
