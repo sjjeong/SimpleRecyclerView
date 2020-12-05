@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dino.simplerecyclerview.mvp.MvpActivity
 import com.dino.simplerecyclerview.mvvm.MvvmActivity
 import com.dino.simplerecyclerview.normal.NormalActivity
+import com.dino.simplerecyclerview.pagination.PaginationActivity
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -19,5 +20,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     fun showMvvmActivity(view: View) {
         startActivity(Intent(this, MvvmActivity::class.java))
+    }
+
+    fun showPaginationActivity(view: View) {
+        startActivity(Intent(this, PaginationActivity::class.java))
     }
 }

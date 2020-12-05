@@ -19,6 +19,7 @@
         <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name=".normal.NormalActivity" />
+        <activity android:name=".pagination.PaginationActivity" />
     </application>
 
 </manifest>

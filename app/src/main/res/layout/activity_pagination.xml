@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dino.simplerecyclerview.pagination.PaginationViewModel" />
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        bind:onRefreshListener="@{() -> vm.reset()}"
+        bind:refreshing="@{vm.isRefresh}">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            bind:dino_itemLayout="@{@layout/item_number}"
+            bind:dino_items="@{vm.items}"
+            bind:dino_onLoad="@{() -> vm.loadItem()}"
+            bind:dino_threshold="@{5}"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_number" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>
