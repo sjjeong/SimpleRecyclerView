@@ -17,6 +17,8 @@ SimpleRecyclerView aims to help produce an easily usable implementation of a Rec
 |dino_itemSpace|dino_itemSpace="@{@dimen/space}"|Space for each item|
 |dino_itemSpace|dino_itemSpace="@{\`8dp\`}"|Space for each item|
 |dino_includeEdge|dino_includeEdge="@{true}"|Padding space for RecyclerView|
+|dino_onLoad|dino_onLoad="@{() -> vm.loadItem()}"|Load more items event handling|
+|dino_threshold|dino_threshold="@{10}"|A threshold of remaining items before they've hit the end|
 
 
 ## Dependency
