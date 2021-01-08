@@ -60,7 +60,7 @@ internal class DinoEndlessRecyclerViewScrollListener(
             previousTotalItemCount = totalItemCount
         }
 
-        if (!loading && lastVisibleItemPosition + visibleThreshold > totalItemCount) {
+        if (!loading && lastVisibleItemPosition + visibleThreshold >= totalItemCount) {
             loading = true
             onLoad()
         }
