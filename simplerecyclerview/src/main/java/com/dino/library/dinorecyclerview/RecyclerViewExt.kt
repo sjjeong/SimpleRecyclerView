@@ -2,20 +2,21 @@ package com.dino.library.dinorecyclerview
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
+import androidx.databinding.adapters.ListenerUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * dino_items="@{vm.itemList}"
- * dino_itemLayout="@{@layout/item_main}"
- * dino_diffCallback="@{(Object)MainItem.Companion}"
- * dino_eventHolder="@{eventHolder}
- * dino_vm="@{vm}
- * dino_viewModel="@{viewModel}
- * dino_headerItem="@{vm.headerItem}"
- * dino_headerItemLayout="@{@layout/item_header}"
- * dino_footerItem="@{vm.footerItem}"
- * dino_footerItemLayout="@{@layout/item_footer}"
+ * @param items             dino_items="@{vm.itemList}"
+ * @param layoutResId       dino_itemLayout="@{@layout/item_main}"
+ * @param diffCallback      dino_diffCallback="@{(Object)MainItem.Companion}"
+ * @param eventHolder       dino_eventHolder="@{eventHolder}
+ * @param vm                dino_vm="@{vm}
+ * @param viewModel         dino_viewModel="@{viewModel}
+ * @param headerItem        dino_headerItem="@{vm.headerItem}"
+ * @param headerLayoutResId dino_headerItemLayout="@{@layout/item_header}"
+ * @param footerItem        dino_footerItem="@{vm.footerItem}"
+ * @param footerLayoutResId dino_footerItemLayout="@{@layout/item_footer}"
  */
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter(
@@ -71,23 +72,23 @@ fun RecyclerView.setDinoAdapter(
 }
 
 /**
- * dino_itemSpace="@{@dimen/space}"
+ * @param space       dino_itemSpace="@{@dimen/space}"
+ * @param includeEdge dino_includeEdge="@{true}"
  */
 @BindingAdapter("dino_itemSpace", "dino_includeEdge", requireAll = false)
 fun RecyclerView.setItemSpace(space: Float = 0f, includeEdge: Boolean = false) {
-    val loop = itemDecorationCount
-    for (i in 0 until loop) {
-        val itemDecoration = getItemDecorationAt(i)
-        if (itemDecoration is DinoSpaceItemDecoration) {
-            removeItemDecorationAt(i)
-            break
-        }
-    }
+    val itemDecoration = DinoSpaceItemDecoration(space.toInt(), includeEdge)
+    ListenerUtil.trackListener(
+        this,
+        itemDecoration,
+        R.id.dino_itemSpace
+    )?.let(::removeItemDecoration)
     addItemDecoration(DinoSpaceItemDecoration(space.toInt(), includeEdge))
 }
 
 /**
- * dino_itemSpace="@{`8dp`}"
+ * @param space       dino_itemSpace="@{`8dp`}"
+ * @param includeEdge dino_includeEdge="@{true}"
  */
 @BindingAdapter("dino_itemSpace", "dino_includeEdge", requireAll = false)
 fun RecyclerView.setItemSpace(space: String = "0dp", includeEdge: Boolean = false) {
@@ -105,8 +106,8 @@ fun RecyclerView.setItemSpace(space: String = "0dp", includeEdge: Boolean = fals
 }
 
 /**
- * dino_onLoad="@{() -> vm.loadItem()}"
- * dino_threshold="@{10}"
+ * @param onLoad    dino_onLoad="@{() -> vm.loadItem()}"
+ * @param threshold dino_threshold="@{10}"
  */
 @BindingAdapter(
     "dino_onLoad",
@@ -120,5 +121,12 @@ fun RecyclerView.set(
     onLoad ?: error(NEED_ON_LOAD_EVENT_HANDLING)
     val layoutManager = layoutManager ?: error(NEED_RECYCLER_VIEW_LAYOUT_MANAGER_ERROR_MSG)
     val scrollListener = DinoEndlessRecyclerViewScrollListener(layoutManager, threshold, onLoad)
+
+    ListenerUtil.trackListener(
+        this,
+        scrollListener,
+        R.id.dino_onScrollListener
+    )?.let(::removeOnScrollListener)
+
     addOnScrollListener(scrollListener)
 }
