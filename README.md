@@ -39,8 +39,8 @@ To configure your app to use data binding, add the `dataBinding` element to your
 ```gradle
 android {
     ...
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding true
     }
 }
 ```
